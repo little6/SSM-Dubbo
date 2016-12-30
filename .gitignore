@@ -1,42 +1,17 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-*/target/
-
-*.classpath
-*.project
-*/generatorConfig.xml
-#忽略class文件
-*.class
-#忽略maven编译的target文件夹
+# Maven
 target/
-#忽略eclipse的工程文件
-# .gitignore for eclipse
-*.tomcatplugin
-*.#webclasspath
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-.classpath
-.settings/
-# IntelliJ project files
-.idea
+*.ser
+*.ec
+
+# IntelliJ Idea
+.idea/
+out/
+*.ipr
+*.iws
 *.iml
-out
-gen
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
