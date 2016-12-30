@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zdy</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.zdy</groupId>
+	<artifactId>web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<tomcat.version>2.2</tomcat.version>
+		<webserver.port>8080</webserver.port>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.path>web</project.build.path>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 在这里 添加自己想要依赖的dubbo服务接口 -->
+		<dependency>
+			<groupId>com.zdy</groupId>
+			<artifactId>dubbo1_service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zdy</groupId>
+			<artifactId>dubbo2_service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<finalName>web</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>filter/config-develop.properties</exclude>
+					<exclude>filter/config-test.properties</exclude>
+					<exclude>filter/config-local.properties</exclude>
+					<exclude>filter/config-product.properties</exclude>
+					<exclude>filter/config-prerelease.properties</exclude>
+				</excludes>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/properties</directory>
+				<includes>
+					<include>dubbo.properties</include>
+					<include>id.properties</include>
+					<include>other.properties</include>
+					<include>redis.properties</include>
+					<include>sendsms.properties</include>
+					<include>logback.properties</include>
+					<include>mq.properties</include>
+				</includes>
+				<targetPath>properties</targetPath>
+				<filtering>true</filtering>
+			</resource>
+
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webfile</directory>
+							<targetPath>WEB-INF</targetPath>
+							<includes>
+								<include>**/web.xml</include>
+							</includes>
+						</resource>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/resources</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<!-- war包bug，必须写出来任意一个文件，否则打出来的war包包含config-这些文件 -->
+							<includes>
+								<include>**/dubbo-consumer.xml</include>
+							</includes>
+						</resource>
+					</webResources>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<build>
+				<filters>
+					<filter>src/main/resources/filter/config-local.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<build>
+				<filters>
+					<filter>src/main/resources/filter/config-develop.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/resources/filter/config-test.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<build>
+				<filters>
+					<filter>src/main/resources/filter/config-product.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>yufabu</id>
+			<build>
+				<filters>
+					<filter>src/main/resources/filter/config-prerelease.properties</filter>
+				</filters>
+			</build>
+		</profile>
+	</profiles>
+</project>
