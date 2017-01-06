@@ -243,5 +243,6 @@
     <module>dubbo1_service_impl</module>
     <module>dubbo2_service</module>
 		<module>dubbo2_service_impl</module>
-  </modules>
+		<module>redis_service</module>
+	</modules>
 </project>

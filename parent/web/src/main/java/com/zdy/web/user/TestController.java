@@ -2,7 +2,6 @@ package com.zdy.web.user;
 
 import com.zdy.common.domain.user.User;
 import com.zdy.dubbo1.service.user.Dubbo1UserService;
-import com.zdy.dubbo2.service.user.Dubbo2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +13,8 @@ public class TestController {
 	@Autowired
 	Dubbo1UserService dubbo1UserService;
 
-	@Autowired
-	Dubbo2UserService dubbo2UserService;
+//	@Autowired
+//	Dubbo2UserService dubbo2UserService;
 
 	@ResponseBody
 	@RequestMapping(value = "test001", produces = "application/json;charset=UTF-8")
@@ -50,9 +49,8 @@ public class TestController {
 	@ResponseBody
 	@RequestMapping(value = "testDubbo004", produces = "application/json;charset=UTF-8")
 	public String testDubbo004() {
-		//在此测试dubbo1的service链接dao使用
-		User user =dubbo2UserService.getUserInfoByTel("123");
-		return user.toString();
+		dubbo1UserService.testRedis();
+		return "OK";
 	}
 
 }

@@ -17,7 +17,10 @@
     
     <import resource="classpath:spring/spring-database.xml"/>
     <import resource="classpath:spring/dubbo-provider.xml"/>
-    
+    <!--集成redis-->
+    <import resource="classpath:spring/spring-redis.xml"/>
+
+
 	<!-- <mvc:annotation-driven /> -->  
 	
    

@@ -28,6 +28,13 @@
 			<artifactId>dubbo1_service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+		<groupId>com.zdy</groupId>
+		<artifactId>redis_service</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>dubbo1_service_impl</finalName>

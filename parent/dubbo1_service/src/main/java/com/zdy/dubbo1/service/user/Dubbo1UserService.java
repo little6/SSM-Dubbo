@@ -16,4 +16,9 @@ public interface Dubbo1UserService {
 	 * @return
 	 */
 	User getUserInfoByTel(String tel);
+
+	/**
+	 * 测试redis的项目
+	 */
+	void testRedis();
 }
